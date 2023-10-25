@@ -24,20 +24,20 @@ public class JavaTesterController {
     @GetMapping(path = "/author", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAuthor() {
         logger.info("Sending the author of this code");
-        ///* 
+        /* 
         String name = "Fabio Guilherme";
         int number = 40001842;
         String nationality = "Brazilian";
         boolean isFootballFan = true;
         String favouriteFootballClub = "Fluminense";
-        //*/
-        /*
+        */
+        ///*
         String name = "Cristiano Ronaldo";
         int number = 7;
         String nationality = "Portuguese";
         boolean isFootballFan = false;
         String favouriteFootballClub = "";
-        */
+        //*/
         String res = "";
 
         res += "Done by " + name + " with number " + number + "\n";
@@ -50,5 +50,10 @@ public class JavaTesterController {
         }
 
         return res;
+    }
+
+    @GetMapping(path = "/access/{student}/{covid}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public boolean getGreeting(@PathVariable("student") boolean isStudent, @PathVariable("covid") boolean hasCovid) {
+        return (isStudent && !hasCovid);
     }
 }
