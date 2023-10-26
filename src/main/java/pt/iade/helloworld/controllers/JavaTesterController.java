@@ -24,20 +24,20 @@ public class JavaTesterController {
     @GetMapping(path = "/author", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAuthor() {
         logger.info("Sending the author of this code");
-        /* 
+        ///* 
         String name = "Fabio Guilherme";
         int number = 40001842;
         String nationality = "Brazilian";
         boolean isFootballFan = true;
         String favouriteFootballClub = "Fluminense";
-        */
-        ///*
+        //*/
+        /*
         String name = "Cristiano Ronaldo";
         int number = 7;
         String nationality = "Portuguese";
         boolean isFootballFan = false;
         String favouriteFootballClub = "";
-        //*/
+        */
         String res = "";
 
         res += "Done by " + name + " with number " + number + "\n";
@@ -65,4 +65,24 @@ public class JavaTesterController {
         return (isStudent && type.equals("presential") && temperature >= 34.5 && temperature <= 37.5);
     }
 
+    final static private double grades[] = {10.5, 12, 14.5};
+    final static private String ucs[] = {"FP","POO","BD"};
+
+    @GetMapping(path = "/grades/average",
+             produces= MediaType.APPLICATION_JSON_VALUE)
+    public double getAverage() {
+        double sum = 0;
+
+        for (double grade : grades) {
+            sum += grade;
+        }
+        /* 
+        for (int i = 0; i < grades.length; i++) {
+            double grade = grades[i];
+            sum += grade;
+        }
+         */
+        
+        return sum/grades.length;
+    }
 }
