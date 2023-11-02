@@ -24,20 +24,20 @@ public class JavaTesterController {
     @GetMapping(path = "/author", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAuthor() {
         logger.info("Sending the author of this code");
-        ///* 
+        /// *
         String name = "Fabio Guilherme";
         int number = 40001842;
         String nationality = "Brazilian";
         boolean isFootballFan = true;
         String favouriteFootballClub = "Fluminense";
-        //*/
+        // */
         /*
-        String name = "Cristiano Ronaldo";
-        int number = 7;
-        String nationality = "Portuguese";
-        boolean isFootballFan = false;
-        String favouriteFootballClub = "";
-        */
+         * String name = "Cristiano Ronaldo";
+         * int number = 7;
+         * String nationality = "Portuguese";
+         * boolean isFootballFan = false;
+         * String favouriteFootballClub = "";
+         */
         String res = "";
 
         res += "Done by " + name + " with number " + number + "\n";
@@ -52,37 +52,48 @@ public class JavaTesterController {
         return res;
     }
 
-    @GetMapping(path = "/access/{student}/{covid}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public boolean getGreeting(@PathVariable("student") boolean isStudent, 
+    @GetMapping(path = "/access/{student}/{covid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean getGreeting(@PathVariable("student") boolean isStudent,
             @PathVariable("covid") boolean hasCovid) {
         return (isStudent && !hasCovid);
     }
 
-    @GetMapping(path = "/required/{student}/{temperature}/{classType}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public boolean getRequired(@PathVariable("student") boolean isStudent, 
+    @GetMapping(path = "/required/{student}/{temperature}/{classType}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean getRequired(@PathVariable("student") boolean isStudent,
             @PathVariable("temperature") double temperature,
             @PathVariable("classType") String type) {
         return (isStudent && type.equals("presential") && temperature >= 34.5 && temperature <= 37.5);
     }
 
-    final static private double grades[] = {10.5, 12, 14.5};
-    final static private String ucs[] = {"FP","POO","BD"};
+    final static private double grades[] = { 10.5, 12, 14.5 };
+    final static private String ucs[] = { "FP", "POO", "BD" };
 
-    @GetMapping(path = "/grades/average",
-             produces= MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/grades/average", produces = MediaType.APPLICATION_JSON_VALUE)
     public double getAverage() {
         double sum = 0;
 
         for (double grade : grades) {
             sum += grade;
         }
-        /* 
-        for (int i = 0; i < grades.length; i++) {
-            double grade = grades[i];
-            sum += grade;
-        }
+        /*
+         * for (int i = 0; i < grades.length; i++) {
+         * double grade = grades[i];
+         * sum += grade;
+         * }
          */
-        
-        return sum/grades.length;
+
+        return sum / grades.length;
     }
+
+    @GetMapping(path = "/units/{name}/grade", produces = MediaType.APPLICATION_JSON_VALUE)
+    public double getGradeByUnitName(@PathVariable("name") String name) {
+        for (int i = 0; i < ucs.length; i++) {
+            if (ucs[i].equals(name)) {
+                return grades[i];
+            }
+        }
+        return -1;
+    }
+
+    private ArrayList<CurricularUnit> units = new ArrayList<>();
 }
