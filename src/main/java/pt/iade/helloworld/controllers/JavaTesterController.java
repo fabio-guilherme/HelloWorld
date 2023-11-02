@@ -95,5 +95,18 @@ public class JavaTesterController {
         return -1;
     }
 
-    private ArrayList<CurricularUnit> units = new ArrayList<>();
+    private ArrayList<CurricularUnit> units = new ArrayList<CurricularUnit>();
+
+    @PostMapping(path = "/units", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CurricularUnit saveUnit(@RequestBody CurricularUnit unit) {
+        logger.info("Added unit " + unit.getName());
+        units.add(unit);
+        return unit;
+    }
+
+    @GetMapping(path = "/units", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<CurricularUnit> getUnits() {
+        logger.info("Get " + units.size() + " Units");
+        return units;
+    }
 }
