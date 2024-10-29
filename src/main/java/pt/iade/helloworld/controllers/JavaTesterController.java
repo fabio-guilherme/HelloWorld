@@ -65,6 +65,14 @@ public class JavaTesterController {
         return (isStudent && type.equals("presential") && temperature >= 34.5 && temperature <= 37.5);
     }
 
+    @GetMapping(path = "/evacuation/{fire}/{numberOfCovids}/{powerShutdown}/{comeBackTime}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean getEvacuation(@PathVariable("fire") boolean hasFire,
+            @PathVariable("numberOfCovids") int numberOfCovids,
+            @PathVariable("powerShutdown") boolean hasPowerShutdown,
+            @PathVariable("comeBackTime") int comeBackTime) {
+        return (hasFire || numberOfCovids > 5 || (hasPowerShutdown && comeBackTime > 15));
+    }
+
     final static private double grades[] = { 10.5, 12, 14.5 };
     final static private String ucs[] = { "FP", "POO", "BD" };
 
