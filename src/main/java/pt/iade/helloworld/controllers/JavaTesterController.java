@@ -103,6 +103,15 @@ public class JavaTesterController {
         return -1;
     }
 
+    @GetMapping(path = "/units/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getUnitsNamesGrades() {
+        String res = "";
+        for (int i = 0; i < ucs.length; i++) {
+            res += ucs[i] + ": " + grades[i] + "\n";
+        }
+        return res;
+    }
+
     private ArrayList<CurricularUnit> units = new ArrayList<CurricularUnit>();
 
     @PostMapping(path = "/units", produces = MediaType.APPLICATION_JSON_VALUE)
