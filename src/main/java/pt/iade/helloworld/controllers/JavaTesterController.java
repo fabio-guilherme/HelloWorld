@@ -95,6 +95,7 @@ public class JavaTesterController {
 
     @GetMapping(path = "/units/{name}/grade", produces = MediaType.APPLICATION_JSON_VALUE)
     public double getGradeByUnitName(@PathVariable("name") String name) {
+        logger.info("Searching the grade for UC " + name);
         for (int i = 0; i < ucs.length; i++) {
             if (ucs[i].equals(name)) {
                 return grades[i];
@@ -105,6 +106,7 @@ public class JavaTesterController {
 
     @GetMapping(path = "/units/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getUnitsNamesGrades() {
+        logger.info("Sending the units and grades");
         String res = "";
         for (int i = 0; i < ucs.length; i++) {
             res += ucs[i] + ": " + grades[i] + "\n";
